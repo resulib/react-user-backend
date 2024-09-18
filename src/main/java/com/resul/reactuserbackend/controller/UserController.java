@@ -4,6 +4,7 @@ import com.resul.reactuserbackend.dto.UserDto;
 import com.resul.reactuserbackend.entity.CreateUserDto;
 import com.resul.reactuserbackend.entity.UpdateUserDto;
 import com.resul.reactuserbackend.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +29,13 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> create(@RequestBody CreateUserDto createUserDto){
+    public ResponseEntity<Void> create(@RequestBody @Valid CreateUserDto createUserDto){
         userService.create(createUserDto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody UpdateUserDto updateUserDto){
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody @Valid UpdateUserDto updateUserDto){
         userService.update(id, updateUserDto);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
